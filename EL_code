@@ -1,0 +1,172 @@
+using Elsystem.collections;
+using elsystem.drawingobjects;
+using elsystem;
+
+Once clearprintlog;
+{ set to Every tick, any of the timeframes listed in code works. }
+
+//time = 1600
+//currenttime = 1306
+{Remember:  market opens at 0830.  So... from 830 to 1600.   0830 means 8 and one-half. SO IT IS 0850 BECAUSE EASYLANGUAGE IS NUMBERS.
+	DAILY CANDLESESSION: 1600-850. Change that to 1500. // 1500 - 850 = 650. }
+Input:
+	TextColor("white"),
+	View_HighOrLow( WeeklyHigh ); //Other options include: high[10], High52Wk, Low52Wk, WeeklyHigh, WeeklyLow...etc
+
+ 
+Vars:
+	currentCandleStatus(0),
+	Time_difference(0),
+	Text1(0),
+	TextColorr(0),
+	
+	dtpoint dtPoint1 (null),
+	textlabel text2 (null);
+	
+
+//initialize variables	
+Time_difference = (time-currenttime);
+
+//colors
+Begin
+If textcolor = "black" then textcolorr = 0;
+If textcolor = "white" then textcolorr = 16777215;
+If textcolor = "blue" then textcolorr = 16711680;
+If textcolor = "cyan" then textcolorr = 16776960;
+If textcolor = "green" then textcolorr =  65280 ;
+If textcolor = "magenta" then textcolorr = 16711935;
+If textcolor = "red" then textcolorr =  255;
+If textcolor = "DarkBlue" then textcolorr = 8388608;
+If textcolor = "yellow" then textcolorr =   65535;
+If textcolor = "DarkCyan" then textcolorr = 8421376;
+If textcolor = "DarkGreen" then textcolorr = 32768;
+If textcolor = "DarkRed" then textcolorr =   128;
+If textcolor = "DarkBrown" then textcolorr = 32896;
+If textcolor = "Darkgray" then textcolorr = 8421504;
+If textcolor = "lightgray" then textcolorr = 12632256;
+End;
+
+//Daily
+If bartype = 2 then
+Begin
+	currentCandleStatus = 1-((1500 - currenttime)/650);
+End;
+
+//Minutes
+
+If bartype = 1 and barinterval = 480 then 
+Begin	
+	If time = 0100 or time = 0200 or time = 0300 or time = 0400 or time = 0500 or time = 0600 or time = 0700 or time = 0800 or time = 0900 or time = 1000 or time = 1100 or time = 1200
+	or time = 1300 or time = 1400 or time = 1500 or time = 1600 or time = 1700 or time = 1800 or time = 1900 or time = 2000 or time = 2100 or time = 2200 or time = 2300 or time = 2400 then
+	begin
+		Time_difference = ((time-40)-currenttime);
+	end;
+	currentCandleStatus = 100*(1- (time_difference / 480));
+end;
+
+If bartype = 1 and barinterval = 240 then 
+Begin	
+	If time = 0100 or time = 0200 or time = 0300 or time = 0400 or time = 0500 or time = 0600 or time = 0700 or time = 0800 or time = 0900 or time = 1000 or time = 1100 or time = 1200
+	or time = 1300 or time = 1400 or time = 1500 or time = 1600 or time = 1700 or time = 1800 or time = 1900 or time = 2000 or time = 2100 or time = 2200 or time = 2300 or time = 2400 then
+	begin
+		Time_difference = ((time-40)-currenttime);
+	end;
+	currentCandleStatus = 100*(1- (time_difference / 240));
+end;
+
+If bartype = 1 and barinterval = 120 then 
+Begin	
+	If time = 0100 or time = 0200 or time = 0300 or time = 0400 or time = 0500 or time = 0600 or time = 0700 or time = 0800 or time = 0900 or time = 1000 or time = 1100 or time = 1200
+	or time = 1300 or time = 1400 or time = 1500 or time = 1600 or time = 1700 or time = 1800 or time = 1900 or time = 2000 or time = 2100 or time = 2200 or time = 2300 or time = 2400 then
+	begin
+		Time_difference = ((time-40)-currenttime);
+	end;
+	currentCandleStatus = 100*(1- (time_difference / 120));
+end;
+
+If bartype = 1 and barinterval = 60 then 
+Begin	
+	If time = 0100 or time = 0200 or time = 0300 or time = 0400 or time = 0500 or time = 0600 or time = 0700 or time = 0800 or time = 0900 or time = 1000 or time = 1100 or time = 1200
+	or time = 1300 or time = 1400 or time = 1500 or time = 1600 or time = 1700 or time = 1800 or time = 1900 or time = 2000 or time = 2100 or time = 2200 or time = 2300 or time = 2400 then
+	begin
+		Time_difference = ((time-40)-currenttime);
+	end;
+	currentCandleStatus = 100*(1- (time_difference / 60));
+end;
+
+If bartype = 1 and barinterval = 15 then 
+Begin	
+	If time = 0100 or time = 0200 or time = 0300 or time = 0400 or time = 0500 or time = 0600 or time = 0700 or time = 0800 or time = 0900 or time = 1000 or time = 1100 or time = 1200
+	or time = 1300 or time = 1400 or time = 1500 or time = 1600 or time = 1700 or time = 1800 or time = 1900 or time = 2000 or time = 2100 or time = 2200 or time = 2300 or time = 2400 then
+	begin
+		Time_difference = ((time-40)-currenttime);
+	end;
+	currentCandleStatus = 100*(1- (time_difference / 15));
+end;
+
+If bartype = 1 and barinterval = 5 then 
+Begin
+	If time = 0100 or time = 0200 or time = 0300 or time = 0400 or time = 0500 or time = 0600 or time = 0700 or time = 0800 or time = 0900 or time = 1000 or time = 1100 or time = 1200
+	or time = 1300 or time = 1400 or time = 1500 or time = 1600 or time = 1700 or time = 1800 or time = 1900 or time = 2000 or time = 2100 or time = 2200 or time = 2300 or time = 2400 then
+	begin
+		Time_difference = ((time-40)-currenttime);
+	end;
+ 	currentCandleStatus = 100*(1- (time_difference / 5));
+end;
+
+If bartype = 1 and barinterval = 3 then 
+Begin
+	If time = 0100 or time = 0200 or time = 0300 or time = 0400 or time = 0500 or time = 0600 or time = 0700 or time = 0800 or time = 0900 or time = 1000 or time = 1100 or time = 1200
+	or time = 1300 or time = 1400 or time = 1500 or time = 1600 or time = 1700 or time = 1800 or time = 1900 or time = 2000 or time = 2100 or time = 2200 or time = 2300 or time = 2400 then
+	begin
+		Time_difference = ((time-40)-currenttime);
+	end;
+	CurrentCandleStatus = 100*(1- (time_difference / 3));
+End;
+
+
+//Extra notes
+//NumToStr( BarInterval, 0 ) + !( " Min" );
+
+
+{//TEXT
+If time > time[1] then 
+Begin
+	If text_exist(text1) = true then text_delete(text1);
+	
+	Text1 = Text_new(D, T, close, NumtoStr(Currentcandlestatus, 2)+!("%"));
+	Text_setstyle(Text1, 0 , 2 ); 
+	Text_SetColor(1, 0);//Textcolorr );
+	//Text_setSize does not exist in tradestation.
+	
+	Value1 = GetappInfo(aiRightDispDateTime);
+	Value2 = ELDate(MonthFromDatetime(value1), DayfromDateTime(value1), Yearfromdatetime(value1));
+	Text_SetLocation(text1, value2, HoursfromDateTime(value1)*100 + MinutesfromDateTime(Value2),close); //(Getappinfo(aiLowestDispValue)+(tickvalue*20))); //You can set the last comma spot equal to close if necessary. 
+End;
+}
+//print(currentcandlestatus,"%");
+//print(text1,"%");
+
+
+
+If date = currentdate then
+Begin
+	{Value1 = GetappInfo(aiRightDispDateTime);
+	Value2 = ELDate(MonthFromDatetime(value1), DayfromDateTime(value1), Yearfromdatetime(value1));
+	Text_SetLocation(text1, value2, HoursfromDateTime(value1)*100 + MinutesfromDateTime(Value2), close); 
+	dtpoint1.Create(,high)}
+	
+	
+	Text2 = TextLabel.Create(dtpoint1.Create(bardatetime[0],View_HighOrLow),numtostr(currentcandlestatus,1)+ !( "%" )); //Text2
+	DrawingObjects.Add(text2); 
+	text2.HStyle = 1;
+	text2.VStyle = 2;
+	text2.Font = elsystem.drawing.Font.Create( "Microsoft Sans Serif", 8, 0 );
+	text2.Lock = true;	
+End;
+
+If Drawingobjects.items[4].count > 1 then
+Begin
+	Drawingobjects.Delete((DrawingObjects.items[4] astype Vector) [0] astype Drawingobject);
+End;
+
